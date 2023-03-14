@@ -1,0 +1,27 @@
+{
+    "name": "mennovanhout/laravel-model-constants",
+    "description": "This package creates constants for column names, this can then be used instead of strings to reduce typo's errors and improve coding with your IDE",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Menno van Hout",
+            "email": "info@mennovanhout.nl"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": "^8.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "MennoVanHout\\LaravelModelConstants\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "MennoVanHout\\LaravelModelConstants\\Providers\\LaravelModelConstantsProvider"
+            ]
+        }
+    }
+}

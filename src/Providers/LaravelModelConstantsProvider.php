@@ -5,7 +5,8 @@ namespace MennoVanHout\LaravelModelConstants\Providers;
 use Illuminate\Database\Events\MigrationsEnded;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
-use MennoVanHout\LaravelModelConstants\Console\Commands\ModelConstantCommand;
+use MennoVanHout\LaravelModelConstants\Console\Commands\ModelConstantCleanCommand;
+use MennoVanHout\LaravelModelConstants\Console\Commands\ModelConstantGenerateCommand;
 use MennoVanHout\LaravelModelConstants\Listeners\GenerateModelConstants;
 
 class LaravelModelConstantsProvider extends ServiceProvider
@@ -17,7 +18,8 @@ class LaravelModelConstantsProvider extends ServiceProvider
         }
 
         $this->commands([
-            ModelConstantCommand::class
+            ModelConstantGenerateCommand::class,
+            ModelConstantCleanCommand::class
         ]);
 
         Event::listen(

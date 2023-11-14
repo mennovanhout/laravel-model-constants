@@ -22,12 +22,16 @@ class ModelConstantGenerateCommand extends ModelConstantCommand
             $instance = new $model;
 
             $columns = collect($instance->getConnection()->getSchemaBuilder()->getColumnListing($instance->getTable()))->map(function (string $name) {
-                return "\t const " . strtoupper($name) . " = '{$name}';";
+                return config('model-constants.indentation') . "const " . strtoupper($name) . " = '{$name}';";
             })->toArray();
             $enumClassName = $reflection->getShortName() . 'Attributes';
-            $enumFileName = substr($reflection->getFileName(), 0, strrpos($reflection->getFileName(), '.')) . 'Attributes.php';
+            $fileLocation = substr($reflection->getFileName(), 0, strrpos($reflection->getFileName(), '/')) . config('model-constants.path');
+            if (!is_dir($fileLocation)) {
+                mkdir($fileLocation);
+            }
+            $enumFileName = $fileLocation . $reflection->getShortName() . 'Attributes.php';
 
-            file_put_contents($enumFileName, "<?php\n\rnamespace {$reflection->getNamespaceName()};\n\ruse MennoVanHout\\LaravelModelConstants\\Types\\ModelAttributes;\n\rclass {$enumClassName} extends ModelAttributes\n{\n" . implode("\n", $columns) . "\n}");
+            file_put_contents($enumFileName, "<?php\n\rnamespace {$reflection->getNamespaceName()};\n\ruse MennoVanHout\\LaravelModelConstants\\Types\\ModelAttributes;\n\rclass {$enumClassName} extends ModelAttributes\n{\n" . implode("\n", $columns) . "\n}\n");
         }
     }
 }

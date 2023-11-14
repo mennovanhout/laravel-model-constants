@@ -27,7 +27,7 @@ return [
     | Attribute path
     |--------------------------------------------------------------------------
     |
-    | This option defines weather or not a single blank line at the end of the file should be added.
+    | This option defines whether a single blank line at the end of the file should be added.
     |
     */
     'eof_blank_line' => true,

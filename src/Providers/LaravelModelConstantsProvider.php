@@ -18,7 +18,7 @@ class LaravelModelConstantsProvider extends ServiceProvider
         }
 
         $this->publishes([
-            __DIR__.'/../config/model-constants.php' => config_path('model-constants.php'),
+            __DIR__.'/../../config/model-constants.php' => config_path('model-constants.php'),
         ]);
 
         $this->commands([

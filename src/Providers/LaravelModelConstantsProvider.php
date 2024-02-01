@@ -3,6 +3,7 @@
 namespace MennoVanHout\LaravelModelConstants\Providers;
 
 use Illuminate\Database\Events\MigrationsEnded;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 use MennoVanHout\LaravelModelConstants\Console\Commands\ModelConstantCleanCommand;
@@ -26,9 +27,11 @@ class LaravelModelConstantsProvider extends ServiceProvider
             ModelConstantCleanCommand::class
         ]);
 
-        Event::listen(
-            MigrationsEnded::class,
-            GenerateModelConstants::class
-        );
+        if (App::environment() != 'testing' && App::environment() != 'production') {
+            Event::listen(
+                MigrationsEnded::class,
+                GenerateModelConstants::class
+            );
+        }
     }
 }

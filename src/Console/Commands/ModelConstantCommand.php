@@ -38,7 +38,7 @@ abstract class ModelConstantCommand extends Command
                 return "{$namespace}\\{$className}";
             })
             ->filter(function (string $fileClass) use ($class) {
-                if ($fileClass === '' || $fileClass === '\\' || !class_exists($fileClass, false)) {
+                if ($fileClass === '' || $fileClass === '\\' || !class_exists($fileClass)) {
                     return false;
                 }
 
